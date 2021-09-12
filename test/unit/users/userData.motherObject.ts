@@ -1,5 +1,4 @@
 import { CreateUserDto } from 'src/modules/users/create.user.dto';
-import { User } from 'src/modules/users/user';
 
 export class UserDataMotherObject {
   static getOne(...inputData): CreateUserDto {

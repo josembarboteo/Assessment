@@ -10,4 +10,9 @@ export class UsersController {
   async addUser(@Body() post: CreateUserDto): Promise<unknown> {
     return this.usersService.createUser(post);
   }
+
+  @Get()
+  getUsers(): Promise<unknown[]> {
+    return this.usersService.findAll();
+  }
 }
