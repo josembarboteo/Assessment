@@ -15,8 +15,19 @@ services:
             - assessment
         volumes:
             - .:/usr/src/app
-            - /usr/src/app/node_modules
+            - ./node_modules:/usr/src/app/node_modules
         restart: unless-stopped
+    database:
+        container_name: mongodb
+        image: mongo:latest
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: assessment
+        networks:
+            - assessment
+        volumes: 
+            - /data/db
 
 networks:
     assessment:
