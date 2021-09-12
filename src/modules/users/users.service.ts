@@ -9,11 +9,18 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async createUser(inputModel: CreateUserDto): Promise<User> {
-    const user = new this.userModel(inputModel);
-    return user.save();
+    return this.userModel
+      .findOneAndUpdate({ phone: inputModel.phone }, inputModel, {
+        upsert: true,
+      })
+      .exec();
   }
 
   async findAll(): Promise<User[]> {
     return this.userModel.find().exec();
+  }
+
+  async findById(id: string): Promise<User> {
+    return this.userModel.findById(id).exec();
   }
 }
