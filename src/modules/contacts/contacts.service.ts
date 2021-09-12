@@ -28,4 +28,15 @@ export class ContactsService {
   async getContactsFromUserId(userId: string): Promise<Contact[]> {
     return this.contactModel.find().where('userId').equals(userId).exec();
   }
+
+  async getContactsFromTowUsersIds(
+    userId1: string,
+    userId2: string,
+  ): Promise<Contact[]> {
+    const contactsUseer1 = await this.getContactsFromUserId(userId1);
+    const contactsUseer2 = await this.getContactsFromUserId(userId2);
+    return contactsUseer1.filter((contact) =>
+      contactsUseer2.filter((contact2) => contact2.phone === contact.phone),
+    );
+  }
 }

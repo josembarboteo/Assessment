@@ -22,4 +22,12 @@ export class ContactsController {
   getContactsForUser(@Param() params) {
     return this.contactsService.getContactsFromUserId(params.userId);
   }
+
+  @Get(':userId1/:userId2')
+  getContactsIntersectionForUsers(@Param() params) {
+    return this.contactsService.getContactsFromTowUsersIds(
+      params.userId1,
+      params.userId2,
+    );
+  }
 }
